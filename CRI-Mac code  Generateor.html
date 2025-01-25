@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRI-MAC CODE GENERATOR</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #007BFF;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #333;
+            text-align: center;
+        }
+        input[type="text"], select {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: left;
+            font-size: 16px;
+        }
+        #dropdown {
+            width: 25ch; /* 25 characters width */
+            margin-bottom: 25px;
+        }
+        #textbox {
+            width: 14ch; /* 14 characters width */
+            margin-bottom: 25px;
+            text-align: center; /* Center align text */
+        }
+        .output {
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #e9f7ef;
+            margin-top: 25px;
+            border-radius: 4px;
+            width: 45ch; /* 45 characters width */
+            text-align: center;
+        }
+        .copy-button {
+            padding: 15px 20px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+        .alert-text {
+            text-align: center;
+            margin-top: 20px;
+            color: red;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CRI-MAC CODE GENERATOR</h1>
+        </div>
+        <div>
+            <label for="dropdown">PS CODE:</label>
+            <select id="dropdown">
+                <option value="02022129">Allapur PS</option>
+                <option value="02022001">Alwal PS</option>
+                <option value="02028004">Amangal PS</option>
+                <option value="02022126">Attapur PS</option>
+                <option value="02022112">Bachupally PS</option>
+                <option value="02022004">Balanagar PS</option>
+                <option value="02022010">Chandanagar PS</option>
+                <option value="02041009">Chevella PS</option>
+                <option value="02022113">Chowdariguda PS</option>
+                <option value="02022008">Cyber Crime PS</option>
+                <option value="02022013">Dundigal PS</option>
+                <option value="02022130">EOW PS</option>
+                <option value="02022003">Gachibowli PS</option>
+                <option value="02022111">IT Corridor Women PS</option>
+                <option value="02022100">Jagadgirigutta PS</option>
+                <option value="02022024">Jeedimetla PS</option>
+                <option value="02022124">Jenome valley PS</option>
+                <option value="02022022">KPHB Colony PS</option>
+                <option value="02022116">Kadthal PS</option>
+                <option value="02028028">Keshampet PS</option>
+                <option value="02022128">Kollur PS</option>
+                <option value="02028047">Kondurg PS</option>
+                <option value="02028037">Kothur PS</option>
+                <option value="02022026">Kukatpally PS</option>
+                <option value="02022018">Madhapur PS</option>
+                <option value="02022052">Mailardevpally PS</option>
+                <option value="02022033">Medchal PS</option>
+                <option value="02022102">Miyapur PS</option>
+                <option value="02022036">Moinabad PS</option>
+                <option value="02022127">Mokila PS</option>
+                <option value="02022117">Nandigama PS</option>
+                <option value="02022038">Narsingi PS</option>
+                <option value="02022011">Petbasheerabad PS</option>
+                <option value="02022044">RGI Airport PS</option>
+                <option value="02022059">Raidurgam PS</option>
+                <option value="02022045">Rajendranagar PS</option>
+                <option value="02029038">Ramchandrapuram PS</option>
+                <option value="02022047">Sanathnagar PS</option>
+                <option value="02041049">Shabad PS</option>
+                <option value="02028060">Shadnagar PS</option>
+                <option value="02022050">Shameerpet PS</option>
+                <option value="02022051">Shamshabad PS</option>
+                <option value="02041052">Shankarpally PS</option>
+                <option value="02022125">Suraram PS</option>
+                <option value="02028063">Thalakondapally PS</option>
+                <!-- Add other PS Codes here if needed -->
+            </select>
+        </div>
+        <div>
+            <label for="textbox">CRIME NUMBER:</label>
+            <input type="text" id="textbox" placeholder="EX: 117/2024" maxlength="9" />
+        </div>
+        <div>
+            <label>CRIMAC CODE:</label>
+            <div class="output" id="output"></div>
+        </div>
+        <div>
+            <button class="copy-button" onclick="copyOutput()">COPY CRIMAC CODE</button>
+        </div>
+        <div>
+            <p class="alert-text">If you find something falls under these listed heads, generate an alert in the CRI-MAC application.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('dropdown').addEventListener('change', () => {
+            document.getElementById('textbox').value = ''; // Clear the crime number input
+            updateOutput();
+        });
+        document.getElementById('textbox').addEventListener('input', updateOutput);
+
+        function updateOutput() {
+            const dropdownValue = document.getElementById('dropdown').value;
+            const textboxValue = document.getElementById('textbox').value;
+            const parts = textboxValue.split('/');
+
+            const currentYear = new Date().getFullYear();
+
+            if (parts.length !== 2 || parts[0].length > 4 || parts[1].length !== 4 || parseInt(parts[1]) > currentYear) {
+                document.getElementById('output').innerText = 'Invalid Crime Number format or year greater than the current year. It should be in the format XXXX/YYYY.';
+                return;
+            }
+
+            const crimeNumber = parts[0].padStart(4, '0');
+            const year = parts[1];
+            const lastTwoDigitsOfYear = year.slice(-2);
+            const crimacCode = `${dropdownValue}${lastTwoDigitsOfYear}${crimeNumber}`;
+            document.getElementById('output').innerText = crimacCode;
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            const range = document.createRange();
+            range.selectNode(output);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert('CRIMAC Code copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body { text-align: center; }
+        .labels { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; text-align: left; }
+        .labels div { flex: 1; }
+        .major-heinous-crimes { color: maroon; }
+        .notorious-criminals { color: blue; }
+        .important-seizures { color: green; }
+        .jail-releases { color: purple; }
+        .high-alerts { color: red; }
+    </style>
+</head>
+<body>
+<div class="Crime Category for Alerts"> 
+        <div class="labels">
+        <div class="major-heinous-crimes">
+            <h3>Major Heinous Crimes</h3>
+            <ul>
+                <li>Attempt to Murder</li>
+                <li>Cyber Crime</li>
+                <li>Dacoity</li>
+                <li>HB by Day</li>
+                <li>HB by Night</li>
+                <li>Kidnapping/Abduction</li>
+                <li>Murder (Homicide)</li>
+                <li>Murder for Gain</li>
+                <li>Riotings</li>
+                <li>Robbery</li>
+                <li>Other</li>
+            </ul>
+        </div>
+        <div class="notorious-criminals">
+            <h3>Notorious Criminals Arrest (Involved In)</h3>
+            <ul>
+                <li>Attempt to Murder</li>
+                <li>Cyber Crime Cheatings</li>
+                <li>Property Offences</li>
+                <li>Dacoity</li>
+                <li>HB by Day</li>
+                <li>HB by Night</li>
+                <li>Kidnapping/Abduction</li>
+                <li>Murder (Homicide)</li>
+                <li>Murder for Gain</li>
+                <li>Rape</li>
+                <li>Riotings</li>
+                <li>Robbery</li>
+                <li>Other</li>
+            </ul>
+        </div>
+        <div class="important-seizures">
+            <h3>Important Seizures/Recoveries</h3>
+            <ul>
+                <li>Vehicles</li>
+                <li>Gold</li>
+                <li>Cash</li>
+                <li>Ganja</li>
+                <li>Liquor Bottles</li>
+                <li>Other</li>
+            </ul>
+        </div>
+        <div class="jail-releases">
+            <h3>Jail Releases (Involved In)</h3>
+            <ul>
+                <li>Attempt to Murder</li>
+                <li>Property Offences</li>
+                <li>Dacoity</li>
+                <li>HB by Day</li>
+                <li>HB by Night</li>
+                <li>Kidnapping/Abduction</li>
+                <li>Murder (Homicide)</li>
+                <li>Murder for Gain</li>
+                <li>Rape</li>
+                <li>Riotings</li>
+                <li>Robbery</li>
+                <li>Other</li>
+            </ul>
+        </div>
+        <div class="high-alerts">
+            <h3>High Alerts/Hue & Cry Notices</h3>
+            <ul>
+                <li>Missing Cases</li>
+                <li>Unidentified Dead Body</li>
+				<li>Missing Vehicles</li>
+				<li>Dacoity</li>
+                <li>HB by Day</li>
+                <li>HB by Night</li>
+                <li>Kidnapping/Abduction</li>
+                <li>Murder (Homicide)</li>
+                <li>Murder for Gain</li>
+                <li>Riotings</li>
+                <li>Robbery</li>
+                <li>Other</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
